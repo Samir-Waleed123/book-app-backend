@@ -2,6 +2,8 @@ from sqlalchemy import create_engine, Column, Integer, String, Float, Boolean, D
 from sqlalchemy.orm import sessionmaker, declarative_base
 import os
 from datetime import datetime
+from dotenv import load_dotenv
+load_dotenv()
 
 # Database setup
 SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
@@ -16,17 +18,17 @@ class BookData(Base):
     title = Column(String, nullable=False)
     description = Column(String)
     author = Column(String, nullable=False)
-    imageUrl = Column(String)  # Consider using 'image_url' for SQL naming conventions
+    imageUrl = Column(String)  
     category = Column(String)
     rating = Column(Float)
     price = Column(Float, nullable=False)
-    discount = Column(String)  # Could also be Float if it represents a percentage
-    amount = Column(Integer)   # Nullable as per your model
-    isBestDeal = Column(Boolean, default=False)  # Consider 'is_best_deal' for SQL conventions
-    isTopBook = Column(Boolean, default=False)    # 'is_top_book'
-    isLatestBook = Column(Boolean, default=False) # 'is_latest_book'
-    isUpcomingBook = Column(Boolean, default=False) # 'is_upcoming_book'
-    created_at = Column(DateTime, default=datetime.utcnow)  # Recommended for tracking
+    discount = Column(String)  
+    amount = Column(Integer)  
+    isBestDeal = Column(Boolean, default=False)  
+    isTopBook = Column(Boolean, default=False)    
+    isLatestBook = Column(Boolean, default=False) 
+    isUpcomingBook = Column(Boolean, default=False) 
+    created_at = Column(DateTime, default=datetime.utcnow)  
     
     def __repr__(self):
         return f"<BookData(title='{self.title}', author='{self.author}')>"
