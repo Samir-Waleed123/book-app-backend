@@ -29,6 +29,15 @@ class BookData(Base):
     isLatestBook = Column(Boolean, default=False) 
     isUpcomingBook = Column(Boolean, default=False) 
     created_at = Column(DateTime, default=datetime.utcnow)  
+
+class userBookData(Base):
+    __tablename__ = 'user_books_data'
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, nullable=False)
+    books = Column(String, nullable=False)  
+
+
     
     def __repr__(self):
         return f"<BookData(title='{self.title}', author='{self.author}')>"

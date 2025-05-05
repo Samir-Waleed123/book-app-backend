@@ -17,3 +17,8 @@ class BookDataSchema(BaseModel):
     isUpcomingBook : bool = False
 
 
+class userBookDataSchema(BaseModel):
+    email : str
+    books : list[str]  
+
+
