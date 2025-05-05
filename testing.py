@@ -7,7 +7,7 @@ import time
 
 
 def upload_books_to_db():
-    url = "http://localhost:8000/books/add"
+    url = "https://book-app-backend-production-304e.up.railway.app/books/add"
     headers = {
         "Content-Type": "application/json"
     }
