@@ -19,6 +19,7 @@ class BookDataSchema(BaseModel):
 
 class userBookDataSchema(BaseModel):
     email : str
-    books : list[str]  
+    books_title : str
+    
 
 
