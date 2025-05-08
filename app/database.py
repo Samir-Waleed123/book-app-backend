@@ -35,7 +35,7 @@ class userBookData(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, nullable=False)
-    books = Column(String, nullable=False)  
+    books_title = Column(String, nullable=False)  
 
 
     
