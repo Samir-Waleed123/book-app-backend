@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Database setup
-SQLALCHEMY_DATABASE_URL ="postgresql://postgres:YiIHIuxEJpCtqeulKHDwNJCJHQVJHsfq@switchback.proxy.rlwy.net:49243/railway"
+SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 Sessionlocal = sessionmaker(autoflush=False, bind=engine)
 Base = declarative_base()
