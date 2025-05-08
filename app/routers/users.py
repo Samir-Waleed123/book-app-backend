@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from typing import Annotated
 
 from app.database import userBookData, get_db
-from app.schemas import BookDataSchema
+from app.schemas import BookDataSchema, userBookDataSchema
 
 router= APIRouter(prefix="/users",tags=["users"])
 
@@ -22,8 +22,8 @@ async def get_books(emiil:str ,db: Session = Depends(get_db)):
     return books
 
 @router.post("/add/purchase")
-async def add_book(request : BookDataSchema,db: Session = Depends(get_db)):
-    book = BookDataSchema(**request.dict())
+async def add_book(request : userBookDataSchema,db: Session = Depends(get_db)):
+    book = userBookData(**request.dict())
     db.add(book)
     db.commit()
     db.refresh(book)
