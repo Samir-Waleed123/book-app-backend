@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import books, users
+from app.routers import books, users, library
 
 
 
@@ -11,6 +11,7 @@ app = FastAPI()
 
 app.include_router(books.router)
 app.include_router(users.router)
+app.include_router(library.router)
 
 
 

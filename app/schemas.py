@@ -20,6 +20,20 @@ class BookDataSchema(BaseModel):
 class userBookDataSchema(BaseModel):
     email : str
     books_title : str
+
+class libraryBookSchema(BaseModel):
+    bookid : int
+    author : str
+    title : str
+
+    class Config:
+        orm_mode = True  # Enable ORM mode to work with SQLAlchemy models
+
+class borrowBookSchema(BaseModel):
+    bookid : int
+    email : str
+
+
     
 
 

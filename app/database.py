@@ -38,6 +38,17 @@ class userBookData(Base):
     books_title = Column(String, nullable=False)  
 
 
+class libraryDatabase(Base):
+    __tablename__ = 'library_database'
+
+    id = Column(Integer, primary_key=True, index=True)
+    bookid = Column(Integer, nullable=False)
+    author = Column(String, nullable=False)
+    title = Column(String, nullable=False)
+    available = Column(Boolean, default=True)
+    email = Column(String, nullable=False)
+
+
     
     def __repr__(self):
         return f"<BookData(title='{self.title}', author='{self.author}')>"
@@ -58,5 +69,3 @@ def get_db():
 if __name__ == "__main__":
     initialize_database()
     print("Database initialized and tables created.")
-
-
