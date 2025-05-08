@@ -14,7 +14,7 @@ from app.schemas import BookDataSchema
 router= APIRouter(prefix="/users",tags=["users"])
 
 
-@router.get("/purchase")
+@router.post("/purchase")
 async def get_books(emiil:str ,db: Session = Depends(get_db)):
     books = db.query(userBookData).filter(userBookData.email == emiil).all()
     if not books:
