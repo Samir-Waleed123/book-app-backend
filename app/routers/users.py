@@ -15,8 +15,8 @@ router= APIRouter(prefix="/users",tags=["users"])
 
 
 @router.post("/purchase")
-async def get_books(emiil:str ,db: Session = Depends(get_db)):
-    books = db.query(userBookData).filter(userBookData.email == emiil).all()
+async def get_books(email:str ,db: Session = Depends(get_db)):
+    books = db.query(userBookData).filter(userBookData.email == email).all()
     if not books:
         raise HTTPException(status_code=404, detail="Books not found")
     return books
