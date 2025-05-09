@@ -42,3 +42,18 @@ async def borrow_book(request:borrowBookSchema , db: Session = Depends(get_db)):
     db.refresh(book)
     return {"message": "Book borrowed successfully"}
 
+@router.put("/return")
+async def return_book(request:borrowBookSchema , db: Session = Depends(get_db)):
+    book = db.query(libraryDatabase).filter(libraryDatabase.bookid == request.bookid).first()
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+    
+    if book.available:
+        raise HTTPException(status_code=400, detail="Book is already available")
+    
+    book.available = True
+    book.email = None
+    db.commit()
+    db.refresh(book)
+    return {"message": "Book returned successfully"}
+

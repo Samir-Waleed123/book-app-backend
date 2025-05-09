@@ -43,10 +43,10 @@ class libraryDatabase(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     bookid = Column(Integer, nullable=False)
-    author = Column(String, nullable=False)
+    author = Column(String, nullable=True)
     title = Column(String, nullable=False)
     available = Column(Boolean, default=True)
-    email = Column(String, nullable=False)
+    email = Column(String, nullable=True)
 
 
     
