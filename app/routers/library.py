@@ -57,3 +57,10 @@ async def return_book(request:borrowBookSchema , db: Session = Depends(get_db)):
     db.refresh(book)
     return {"message": "Book returned successfully"}
 
+@router.get('/userbooks')
+async def get_user_books(email: str, db: Session = Depends(get_db)):
+    books = db.query(libraryDatabase).filter(libraryDatabase.email == email).all()
+    if not books:
+        raise HTTPException(status_code=404, detail="No books found for this user")
+    return books
+
