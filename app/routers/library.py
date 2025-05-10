@@ -19,7 +19,7 @@ async def get_books(db: Session = Depends(get_db)):
     return books
 
 
-@router.post("/add")
+@router.post("/add",status_code=status.HTTP_201_CREATED)
 async def add_book(request : libraryBookSchema,db: Session = Depends(get_db)):
     book = libraryDatabase(**request.dict())
     db.add(book)
@@ -63,4 +63,14 @@ async def get_user_books(email: str, db: Session = Depends(get_db)):
     if not books:
         raise HTTPException(status_code=404, detail="No books found for this user")
     return books
+
+@router.delete('/delete',status_code=status.HTTP_204_NO_CONTENT)
+async def delete_book(bookid: int, db: Session = Depends(get_db)):
+    book = db.query(libraryDatabase).filter(libraryDatabase.bookid == bookid).first()
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+    
+    db.delete(book)
+    db.commit()
+    return {"message": "Book deleted successfully"}
 
