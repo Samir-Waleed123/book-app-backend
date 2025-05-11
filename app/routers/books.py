@@ -11,6 +11,7 @@ from typing import Annotated
 
 from app.database import BookData, get_db
 from app.schemas import BookDataSchema
+from util import verify_credentials
 
 router= APIRouter(prefix="/books",tags=["Books"])
 
@@ -24,7 +25,7 @@ async def get_books(db: Session = Depends(get_db)):
 
 
 @router.post("/add")
-async def add_book(request : BookDataSchema,db: Session = Depends(get_db)):
+async def add_book(request : BookDataSchema,db: Session = Depends(get_db),username: str = Depends(verify_credentials)):
     # Check if the book already exists in the database
     existing_book = db.query(BookData).filter(BookData.title == request.title).first()
     if existing_book:
