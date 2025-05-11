@@ -38,7 +38,7 @@ async def add_book(request : BookDataSchema,db: Session = Depends(get_db),userna
         return book
     
 @router.put("/update/{book_id}")
-async def update_book(book_id: int, request: BookDataSchema, db: Session = Depends(get_db)):
+async def update_book(book_id: int, request: BookDataSchema, db: Session = Depends(get_db),username: str = Depends(verify_credentials)):
     book = db.query(BookData).filter(BookData.id == book_id).first()
     if not book:
         raise HTTPException(status_code=404, detail="Book not found")
@@ -51,7 +51,7 @@ async def update_book(book_id: int, request: BookDataSchema, db: Session = Depen
     return book
 
 @router.delete("/delete/{book_id}")
-async def delete_book(book_id: str, db: Session = Depends(get_db)):
+async def delete_book(book_id: str, db: Session = Depends(get_db),username: str = Depends(verify_credentials)):
     book = db.query(BookData).filter(BookData.id == book_id).first()
     if not book:
         raise HTTPException(status_code=404, detail="Book not found")
